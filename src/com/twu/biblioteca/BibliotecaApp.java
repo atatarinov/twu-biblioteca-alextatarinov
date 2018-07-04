@@ -8,5 +8,11 @@ public class BibliotecaApp {
         System.out.println("*****************************************************************");
         System.out.println("*** " + startup.greetUserOnStartup() + " ***");
         System.out.println("*****************************************************************");
+
+        LibraryDatabase database = new LibraryDatabase();
+        System.out.println();
+        System.out.println("Currently available books:");
+        System.out.println();
+        database.printBooksToScreen(database.getCurrentBooks());
     }
 }
