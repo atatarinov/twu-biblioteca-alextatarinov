@@ -13,6 +13,8 @@ public class BibliotecaApp {
         System.out.println();
         System.out.println("Currently available books:");
         System.out.println();
-        database.printBooksToScreen(database.getCurrentBooks());
+        database.printBooksInfoToScreen(database.getCurrentBooks());
+
+
     }
 }
