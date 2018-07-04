@@ -6,14 +6,16 @@ public class BibliotecaApp {
 
         UserGreeter startup = new UserGreeter();
         System.out.println("*****************************************************************");
-        System.out.println("*** " + startup.greetUserOnStartup() + " ***");
+        System.out.println("*** " + startup.greetUserOnStart() + " ***");
         System.out.println("*****************************************************************");
 
         LibraryDatabase database = new LibraryDatabase();
+        BookPrinter bookPrinter = new BookPrinter();
+
         System.out.println();
         System.out.println("Currently available books:");
         System.out.println();
-        database.printBooksInfoToScreen(database.getCurrentBooks());
+        bookPrinter.printBooksInfoToScreen(database.getCurrentBooks());
 
 
     }

@@ -9,7 +9,7 @@ public class BibliotecaTest {
 
     @Test
     public void greetsUserOnStart() {
-        assertEquals("Welcome to the Bangalore Public Library Management System", new UserGreeter().greetUserOnStartup());
+        assertEquals("Welcome to the Bangalore Public Library Management System", new UserGreeter().greetUserOnStart());
     }
 
     @Test
