@@ -27,20 +27,22 @@ public class BibliotecaApp {
                 System.out.println("Currently available books:");
                 System.out.println();
                 bookPrinter.printBooksInfoToScreen(database.getCurrentBooks());
+
+                System.out.println();
+                System.out.println("Please type \"list books\" and press ENTER to view all available books");
+                System.out.println("Or type \"quit\" and press ENTER to quit");
+                userInput = reader.nextLine();
+            } else if (userInput.equals("quit")) {
+                System.out.println("Good bye!");
                 reader.close();
                 break;
             } else {
                 System.out.println("Select a valid option!");
                 System.out.println("Please type \"list books\" and press ENTER to view all available books");
+                System.out.println("Or type \"quit\" and press ENTER to quit");
                 userInput = reader.nextLine();
             }
-
-
-
-
         }
-
-
-
     }
+
 }
