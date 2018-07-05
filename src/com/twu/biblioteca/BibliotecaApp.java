@@ -12,14 +12,15 @@ public class BibliotecaApp {
         System.out.println("*****************************************************************");
 
 
-        UserMenuOptions userOptions = new UserMenuOptions();
+        UserMenuOptionsAndMessages userOptions = new UserMenuOptionsAndMessages();
         LibraryDatabase database = new LibraryDatabase();
         BookPrinter bookPrinter = new BookPrinter();
         Scanner reader = new Scanner(System.in);
 
         System.out.println();
-        System.out.println(userOptions.listBooks());
+        System.out.println(userOptions.listBooksOption());
         System.out.println(userOptions.generalCheckoutOption());
+        System.out.println(userOptions.generalReturnOption());
         System.out.println(userOptions.quitOption());
         String userInput = reader.nextLine();
 
@@ -32,38 +33,69 @@ public class BibliotecaApp {
                 bookPrinter.printBooksInfoToScreen(database.getCurrentBooks());
                 System.out.println();
                 System.out.println(userOptions.generalCheckoutOption());
+                System.out.println(userOptions.generalReturnOption());
                 System.out.println(userOptions.quitOption());
                 userInput = reader.nextLine();
             } else if(userInput.equals("checkout")) {
                 System.out.println();
                 System.out.println(userOptions.checkoutBookOption());
                 userInput = reader.nextLine();
-                if (database.processUserRequest(userInput)) {
+
+                if (database.processCheckoutRequestFromUser(userInput)) {
                     System.out.println();
                     System.out.println(userOptions.checkoutSuccessMessage());
                     System.out.println();
-                    System.out.println(userOptions.listBooks());
+                    System.out.println(userOptions.listBooksOption());
                     System.out.println(userOptions.generalCheckoutOption());
+                    System.out.println(userOptions.generalReturnOption());
                     System.out.println(userOptions.quitOption());
                     userInput = reader.nextLine();
                 } else {
                     System.out.println();
-                    System.out.println(userOptions.checkoutUnsuccessMessage());
+                    System.out.println(userOptions.checkoutFailMessage());
                     System.out.println();
-                    System.out.println(userOptions.listBooks());
+                    System.out.println(userOptions.listBooksOption());
                     System.out.println(userOptions.generalCheckoutOption());
+                    System.out.println(userOptions.generalReturnOption());
+                    System.out.println(userOptions.quitOption());
+                    userInput = reader.nextLine();
+                }
+
+            } else if (userInput.equals("return")) {
+                System.out.println();
+                System.out.println(userOptions.returnBookOption());
+                userInput = reader.nextLine();
+
+                if (database.processReturnRequestFromUser(userInput)) {
+                    System.out.println();
+                    System.out.println(userOptions.returnSuccessMessage());
+                    System.out.println();
+                    System.out.println(userOptions.listBooksOption());
+                    System.out.println(userOptions.generalCheckoutOption());
+                    System.out.println(userOptions.generalReturnOption());
+                    System.out.println(userOptions.quitOption());
+                    userInput = reader.nextLine();
+                } else {
+                    System.out.println();
+                    System.out.println(userOptions.returnFailMessage());
+                    System.out.println();
+                    System.out.println(userOptions.listBooksOption());
+                    System.out.println(userOptions.generalCheckoutOption());
+                    System.out.println(userOptions.generalReturnOption());
                     System.out.println(userOptions.quitOption());
                     userInput = reader.nextLine();
                 }
 
             } else if (userInput.equals("quit")) {
+                System.out.println();
                 System.out.println("Good bye!");
                 reader.close();
                 break;
             } else {
                 System.out.println(userOptions.invalidOption());
-                System.out.println(userOptions.listBooks());
+                System.out.println(userOptions.listBooksOption());
                 System.out.println(userOptions.generalCheckoutOption());
+                System.out.println(userOptions.generalReturnOption());
                 System.out.println(userOptions.quitOption());
                 userInput = reader.nextLine();
             }

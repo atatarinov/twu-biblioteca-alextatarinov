@@ -1,7 +1,6 @@
 package com.twu.biblioteca;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class LibraryDatabase {
 
@@ -14,6 +13,7 @@ public class LibraryDatabase {
     }
 
     private ArrayList<String> currentBooks = new ArrayList<>();
+    private ArrayList<String> checkedoutBooks = new ArrayList<>();
 
     public ArrayList getCurrentBooks() {
         return currentBooks;
@@ -23,19 +23,51 @@ public class LibraryDatabase {
         currentBooks.remove(index);
     }
 
-    public boolean processUserRequest(String title) {
+    public void returnBookFromUser(String book) {
+        currentBooks.add(book);
+    }
+
+    public boolean processCheckoutRequestFromUser(String title) {
         int bookIndex = -1;
+        String bookToCheckout;
 
         for (String bookEntry : currentBooks) {
-            String bookTitle = bookEntry.split(";")[0];
+            String bookTitle = getBookTitle(bookEntry);
 
             if (bookTitle.equals(title)) {
                 bookIndex = currentBooks.indexOf(bookEntry);
+                bookToCheckout = bookEntry;
             }
         }
 
         if (bookIndex > -1) {
+            checkedoutBooks.add(currentBooks.get(bookIndex));
             checkoutBookToUser(bookIndex);
+            return true;
+        }
+        return false;
+    }
+
+    private String getBookTitle(String bookEntry) {
+        return bookEntry.split(";")[0];
+    }
+
+    public boolean processReturnRequestFromUser(String title) {
+        int bookIndex = -1;
+        String bookToReturn = null;
+
+        for (String checkedoutBook : checkedoutBooks) {
+            String bookTitle = getBookTitle(checkedoutBook);
+
+            if (bookTitle.equals(title)) {
+                bookIndex = checkedoutBooks.indexOf(checkedoutBook);
+                bookToReturn = checkedoutBook;
+            }
+        }
+
+        if (bookIndex > -1) {
+            currentBooks.add(bookToReturn);
+            checkedoutBooks.remove(bookIndex);
             return true;
         }
         return false;
