@@ -19,4 +19,26 @@ public class LibraryDatabase {
         return currentBooks;
     }
 
+    public void checkoutBookToUser(int index) {
+        currentBooks.remove(index);
+    }
+
+    public boolean processUserRequest(String title) {
+        int bookIndex = -1;
+
+        for (String bookEntry : currentBooks) {
+            String bookTitle = bookEntry.split(";")[0];
+
+            if (bookTitle.equals(title)) {
+                bookIndex = currentBooks.indexOf(bookEntry);
+            }
+        }
+
+        if (bookIndex > -1) {
+            checkoutBookToUser(bookIndex);
+            return true;
+        }
+        return false;
+    }
+
 }

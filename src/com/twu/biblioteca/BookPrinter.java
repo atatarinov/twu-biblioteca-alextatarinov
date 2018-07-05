@@ -15,7 +15,6 @@ public class BookPrinter {
             String bookTitle = bookItem[0];
             String bookAuthor = bookItem[1];
             String bookPublicationYear = bookItem[2];
-
             System.out.printf("%-40s %-40s %4s\n", bookTitle, bookAuthor, bookPublicationYear);
         }
     }

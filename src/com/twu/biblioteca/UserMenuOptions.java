@@ -14,8 +14,20 @@ public class UserMenuOptions {
         return "or type \"quit\" and press ENTER to quit";
     }
 
-    public String checkoutOption() {
-        return "To checkout a book, type in the title and press ENTER";
+    public String generalCheckoutOption() {
+        return "To checkout a book, type \"checkout\" and press ENTER";
+    }
+
+    public String checkoutBookOption() {
+        return "To checkout a book, type in the book's title and press ENTER";
+    }
+
+    public String checkoutSuccessMessage() {
+        return "Thank you! Enjoy the book";
+    }
+
+    public String checkoutUnsuccessMessage() {
+        return "That book is not available";
     }
 
 }
