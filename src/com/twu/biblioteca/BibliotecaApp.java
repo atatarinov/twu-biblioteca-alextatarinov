@@ -12,7 +12,11 @@ public class BibliotecaApp {
         System.out.println(userOptions.quitOption());
     }
 
-    private static void executeProgram(UserMenuOptionsAndMessages userOptions, LibraryDatabase database, UserGreeter userGreeter, Scanner reader, String userInput) {
+    private static void runOptions(UserMenuOptionsAndMessages userOptions, UserGreeter userGreeter) {
+        LibraryDatabase database = new LibraryDatabase();
+        Scanner reader = new Scanner(System.in);
+        String userInput = reader.nextLine().trim();
+
         while (true) {
 
             if (userInput.equals("list books")) {
@@ -72,17 +76,13 @@ public class BibliotecaApp {
     public static void main(String[] args) {
         UserGreeter userGreeter = new UserGreeter();
         UserMenuOptionsAndMessages userOptions = new UserMenuOptionsAndMessages();
-        LibraryDatabase database = new LibraryDatabase();
 
         System.out.println("*****************************************************************");
         System.out.println("*** " + userGreeter.greetUserOnStart() + " ***");
         System.out.println("*****************************************************************");
 
-        Scanner reader = new Scanner(System.in);
-
         listOptions(userOptions);
-        String userInput = reader.nextLine().trim();
-        executeProgram(userOptions, database, userGreeter, reader, userInput);
+        runOptions(userOptions, userGreeter);
     }
 
 
