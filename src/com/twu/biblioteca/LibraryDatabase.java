@@ -19,37 +19,35 @@ public class LibraryDatabase {
         return currentBooks;
     }
 
-    public void checkoutBookToUser(int index) {
+    private void checkoutBookToUser(int index) {
+        checkedoutBooks.add(currentBooks.get(index));
         currentBooks.remove(index);
     }
 
-    public void returnBookFromUser(String book) {
+    private void returnBookFromUser(String book) {
         currentBooks.add(book);
-    }
-
-    public boolean processCheckoutRequestFromUser(String title) {
-        int bookIndex = -1;
-        String bookToCheckout;
-
-        for (String bookEntry : currentBooks) {
-            String bookTitle = getBookTitle(bookEntry);
-
-            if (bookTitle.equals(title)) {
-                bookIndex = currentBooks.indexOf(bookEntry);
-                bookToCheckout = bookEntry;
-            }
-        }
-
-        if (bookIndex > -1) {
-            checkedoutBooks.add(currentBooks.get(bookIndex));
-            checkoutBookToUser(bookIndex);
-            return true;
-        }
-        return false;
+        checkedoutBooks.remove(book);
     }
 
     private String getBookTitle(String bookEntry) {
         return bookEntry.split(";")[0];
+    }
+
+    public boolean processCheckoutRequestFromUser(String title) {
+        int bookIndex = -1;
+
+        for (String bookEntry : currentBooks) {
+            String bookTitle = getBookTitle(bookEntry);
+            if (bookTitle.equals(title)) {
+                bookIndex = currentBooks.indexOf(bookEntry);
+            }
+        }
+
+        if (bookIndex > -1) {
+            checkoutBookToUser(bookIndex);
+            return true;
+        }
+        return false;
     }
 
     public boolean processReturnRequestFromUser(String title) {
@@ -58,7 +56,6 @@ public class LibraryDatabase {
 
         for (String checkedoutBook : checkedoutBooks) {
             String bookTitle = getBookTitle(checkedoutBook);
-
             if (bookTitle.equals(title)) {
                 bookIndex = checkedoutBooks.indexOf(checkedoutBook);
                 bookToReturn = checkedoutBook;
@@ -66,8 +63,7 @@ public class LibraryDatabase {
         }
 
         if (bookIndex > -1) {
-            currentBooks.add(bookToReturn);
-            checkedoutBooks.remove(bookIndex);
+            returnBookFromUser(bookToReturn);
             return true;
         }
         return false;
