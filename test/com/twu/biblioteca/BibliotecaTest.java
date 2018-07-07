@@ -10,7 +10,7 @@ public class BibliotecaTest {
 
     @Test
     public void greetsUserOnStart() {
-        assertEquals("Welcome to the Bangalore Public Library Management System", new UserGreeter().greetUserOnStart());
+        assertEquals("Welcome to the Bangalore Public Library Management System", new UserGreeterAndInfoPrinter().greetUserOnStart());
     }
 
     @Ignore
@@ -109,6 +109,11 @@ public class BibliotecaTest {
     @Test
     public void outputsUnsuccessfulReturnMessage() {
         assertEquals("That is not a valid book to return", new UserMenuOptionsAndMessages().returnFailMessage());
+    }
+
+    @Test
+    public void outputsListMoviesOptionToUser() {
+        assertEquals("Type \"list movies\" and press ENTER to view all available movies", new UserMenuOptionsAndMessages().listMoviesOption());
     }
 }
 

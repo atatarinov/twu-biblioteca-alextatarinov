@@ -7,19 +7,27 @@ public class BibliotecaApp {
     private static void listOptions(UserMenuOptionsAndMessages userOptions) {
         System.out.println();
         System.out.println(userOptions.listBooksOption());
+        System.out.println(userOptions.listMoviesOption());
         System.out.println(userOptions.generalCheckoutOption());
         System.out.println(userOptions.generalReturnOption());
         System.out.println(userOptions.quitOption());
     }
 
-    private static void showBooks(UserGreeter userGreeter, LibraryDatabase database) {
+    private static void printBooksOnScreenForUser(UserGreeterAndInfoPrinter userGreeter, LibraryDatabase database) {
         System.out.println();
         System.out.println("Currently available books:");
         System.out.println();
-        userGreeter.printBooksInfoToScreen(database.getCurrentBooks());
+        userGreeter.printBooksToScreenForUser(database.getCurrentBooks());
     }
 
-    private static void runOptions(UserMenuOptionsAndMessages userOptions, UserGreeter userGreeter) {
+    private static void printMoviesOnScreenForUser(UserGreeterAndInfoPrinter userGreeter, LibraryDatabase database) {
+        System.out.println();
+        System.out.println("Currently available movies:");
+        System.out.println();
+        userGreeter.printMoviesToScreenForUser(database.getCurrentMovies());
+    }
+
+    private static void runOptionsForUser(UserMenuOptionsAndMessages userOptions, UserGreeterAndInfoPrinter userGreeter) {
         LibraryDatabase database = new LibraryDatabase();
         Scanner reader = new Scanner(System.in);
         String userInput = reader.nextLine().trim();
@@ -28,7 +36,11 @@ public class BibliotecaApp {
         while (true) {
 
             if (userInput.equals("list books")) {
-                showBooks(userGreeter, database);
+                printBooksOnScreenForUser(userGreeter, database);
+                listOptions(userOptions);
+                userInput = reader.nextLine().trim();
+            } else if (userInput.equals("list movies")) {
+                printMoviesOnScreenForUser(userGreeter, database);
                 listOptions(userOptions);
                 userInput = reader.nextLine().trim();
             } else if (userInput.equals("checkout")) {
@@ -80,7 +92,7 @@ public class BibliotecaApp {
 
 
     public static void main(String[] args) {
-        UserGreeter userGreeter = new UserGreeter();
+        UserGreeterAndInfoPrinter userGreeter = new UserGreeterAndInfoPrinter();
         UserMenuOptionsAndMessages userOptions = new UserMenuOptionsAndMessages();
 
         System.out.println("*****************************************************************");
@@ -88,7 +100,7 @@ public class BibliotecaApp {
         System.out.println("*****************************************************************");
 
         listOptions(userOptions);
-        runOptions(userOptions, userGreeter);
+        runOptionsForUser(userOptions, userGreeter);
     }
 
 

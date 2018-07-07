@@ -10,10 +10,17 @@ public class LibraryDatabase {
         currentBooks.add("Something Wicked This Way Comes; Ray Bradbury; 1998");
         currentBooks.add("Pride and Prejudice and Zombies; Seth Grahame-Smith & Jane Austen; 2009");
         currentBooks.add("I Was Told There'd Be Cake; Sloane Crosley; 2008");
+
+        currentMovies.add("The Godfather; 1972; Francis Ford Coppola; 9.2");
+        currentMovies.add("The Shawshank Redemption; 1994; Frank Darabont; 9.3");
+        currentMovies.add("Schindler's List; 1993; Steven Spielberg; 8.9");
+        currentMovies.add("Raging Bull; 1980; Martin Scorsese; 8.2");
+        currentMovies.add("Casablanca; 1942; Michael Curtiz; 8.5");
     }
 
     private ArrayList<String> currentBooks = new ArrayList<>();
     private ArrayList<String> checkedoutBooks = new ArrayList<>();
+    private ArrayList<String> currentMovies = new ArrayList<>();
 
     public ArrayList getCurrentBooks() {
         return currentBooks;
@@ -69,4 +76,7 @@ public class LibraryDatabase {
         return false;
     }
 
+    public ArrayList<String> getCurrentMovies() {
+        return currentMovies;
+    }
 }

@@ -46,4 +46,7 @@ public class UserMenuOptionsAndMessages {
         return "That is not a valid book to return";
     }
 
+    public String listMoviesOption() {
+        return "Type \"list movies\" and press ENTER to view all available movies";
+    }
 }
