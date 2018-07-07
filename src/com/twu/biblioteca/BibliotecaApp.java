@@ -12,18 +12,23 @@ public class BibliotecaApp {
         System.out.println(userOptions.quitOption());
     }
 
+    private static void showBooks(UserGreeter userGreeter, LibraryDatabase database) {
+        System.out.println();
+        System.out.println("Currently available books:");
+        System.out.println();
+        userGreeter.printBooksInfoToScreen(database.getCurrentBooks());
+    }
+
     private static void runOptions(UserMenuOptionsAndMessages userOptions, UserGreeter userGreeter) {
         LibraryDatabase database = new LibraryDatabase();
         Scanner reader = new Scanner(System.in);
         String userInput = reader.nextLine().trim();
 
+
         while (true) {
 
             if (userInput.equals("list books")) {
-                System.out.println();
-                System.out.println("Currently available books:");
-                System.out.println();
-                userGreeter.printBooksInfoToScreen(database.getCurrentBooks());
+                showBooks(userGreeter, database);
                 listOptions(userOptions);
                 userInput = reader.nextLine().trim();
             } else if (userInput.equals("checkout")) {
@@ -73,6 +78,7 @@ public class BibliotecaApp {
         }
     }
 
+
     public static void main(String[] args) {
         UserGreeter userGreeter = new UserGreeter();
         UserMenuOptionsAndMessages userOptions = new UserMenuOptionsAndMessages();
@@ -84,7 +90,6 @@ public class BibliotecaApp {
         listOptions(userOptions);
         runOptions(userOptions, userGreeter);
     }
-
 
 
 }
