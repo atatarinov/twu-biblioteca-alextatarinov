@@ -96,4 +96,8 @@ public class UserMenuOptionsAndMessagesTest {
         assertEquals("You must login to check-out and return books", new UserMenuOptionsAndMessages().loginRequiredMessage());
     }
 
+    @Test
+    public void showUserInfo() {
+        assertEquals("To view your user information: type \"user\" and press ENTER", new UserMenuOptionsAndMessages().showUserInfoOption());
+    }
 }

@@ -27,16 +27,14 @@ public class BibliotecaApp {
             } else {
                 System.out.println();
                 System.out.println(userOptions.invalidOption());
-                userGreeter.listOptionsForLoggedInUser(userOptions);
+                userGreeter.listOptionsForGuestUser(userOptions);
                 userInput = reader.nextLine().trim();
             }
         }
     }
 
-    private static void runAppForLoggedInUser(UserMenuOptionsAndMessages userOptions, UserGreeterAndInfoPrinter userGreeter, LibraryDatabase database) {
-//        LibraryDatabase database = new LibraryDatabase();
+    private static void runAppForLoggedInUser(UserMenuOptionsAndMessages userOptions, UserGreeterAndInfoPrinter userGreeter, LibraryDatabase database, String[] loggedInUser) {
         Scanner reader = new Scanner(System.in);
-
         userGreeter.listOptionsForLoggedInUser(userOptions);
         String userInput = reader.nextLine().trim();
 
@@ -106,6 +104,10 @@ public class BibliotecaApp {
                 System.out.println(userOptions.goodByeMessage());
                 reader.close();
                 break;
+            } else if (userInput.equals("user")) {
+                printUserNameEmailPhone(loggedInUser);
+                userGreeter.listOptionsForLoggedInUser(userOptions);
+                userInput = reader.nextLine().trim();
             } else {
                 System.out.println();
                 System.out.println(userOptions.invalidOption());
@@ -113,6 +115,13 @@ public class BibliotecaApp {
                 userInput = reader.nextLine().trim();
             }
         }
+    }
+
+    private static void printUserNameEmailPhone(String[] loggedInUser) {
+        System.out.println();
+        System.out.println("Your user information:");
+        System.out.println();
+        System.out.println("Name: " + loggedInUser[2] + "\nEmail: " + loggedInUser[3] + "\nPhone number: " + loggedInUser[4]);
     }
 
     public static void main(String[] args) {
@@ -165,7 +174,7 @@ public class BibliotecaApp {
                 if (database.checkUserPassword(userInput)) {
                     loggedInUser = database.getUserToLogin();
                     System.out.println("Welcome back, " + loggedInUser[2] + "!");
-                    runAppForLoggedInUser(userOptions, userGreeter, database);
+                    runAppForLoggedInUser(userOptions, userGreeter, database, loggedInUser);
                     break;
                 }
 

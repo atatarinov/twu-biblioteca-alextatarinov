@@ -43,6 +43,8 @@ public class UserGreeterAndInfoPrinter {
         System.out.println(userOptions.movieCheckoutOption());
         System.out.println();
         System.out.println(userOptions.bookReturnOption());
+        System.out.println();
+        System.out.println(userOptions.showUserInfoOption());
         System.out.println(userOptions.quitOption());
     }
 

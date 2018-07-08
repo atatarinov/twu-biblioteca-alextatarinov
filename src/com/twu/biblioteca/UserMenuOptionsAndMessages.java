@@ -77,4 +77,8 @@ public class UserMenuOptionsAndMessages {
     public String continueAsGuestOrUserOption() {
         return "hello";
     }
+
+    public String showUserInfoOption() {
+        return "To view your user information: type \"user\" and press ENTER";
+    }
 }
