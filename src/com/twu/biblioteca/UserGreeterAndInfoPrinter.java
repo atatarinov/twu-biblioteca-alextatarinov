@@ -13,7 +13,9 @@ public class UserGreeterAndInfoPrinter {
     }
 
     public String continueAsGuestOrUserOption() {
-        return "To continue as a guest: type in \"guest\" and press ENTER\nTo login: type in \"login\" and press ENTER";
+        return "To continue as a guest: type in \"guest\" and press ENTER" +
+                "\nTo login: type in \"login\" and press ENTER" +
+                "\nTo quit: type in \"quit\" and press ENTER";
     }
 
     public void printAvailableMoviesToScreenForUser(LibraryDatabase database) {
@@ -29,8 +31,6 @@ public class UserGreeterAndInfoPrinter {
         System.out.println();
         System.out.println(userOptions.listBooksOption());
         System.out.println(userOptions.listMoviesOption());
-        System.out.println();
-
         System.out.println(userOptions.quitOption());
     }
 

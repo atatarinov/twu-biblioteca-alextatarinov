@@ -33,9 +33,11 @@ public class BibliotecaApp {
         }
     }
 
-    private static void runAppForLoggedInUser(UserMenuOptionsAndMessages userOptions, UserGreeterAndInfoPrinter userGreeter) {
-        LibraryDatabase database = new LibraryDatabase();
+    private static void runAppForLoggedInUser(UserMenuOptionsAndMessages userOptions, UserGreeterAndInfoPrinter userGreeter, LibraryDatabase database) {
+//        LibraryDatabase database = new LibraryDatabase();
         Scanner reader = new Scanner(System.in);
+
+        userGreeter.listOptionsForLoggedInUser(userOptions);
         String userInput = reader.nextLine().trim();
 
         while (true) {
@@ -122,28 +124,66 @@ public class BibliotecaApp {
         Scanner reader = new Scanner(System.in);
         String userInput = reader.nextLine().trim();
 
-        if (userInput.equals("guest")) {
-            userGreeter.listOptionsForGuestUser(userOptions);
-            runAppForGuestUser(userOptions, userGreeter);
-        } else if (userInput.equals("login")) {
-            loginUser(userGreeter, userOptions);
+        while (true) {
+            if (userInput.equals("guest")) {
+                userGreeter.listOptionsForGuestUser(userOptions);
+                runAppForGuestUser(userOptions, userGreeter);
+                break;
+            } else if (userInput.equals("login")) {
+                loginUser(userGreeter, userOptions);
+                break;
+            } else if (userInput.equals("quit")) {
+                System.out.println();
+                System.out.println(userOptions.goodByeMessage());
+                reader.close();
+                break;
+            } else {
+                System.out.println();
+                System.out.println(userOptions.invalidOption());
+                System.out.println(userGreeter.continueAsGuestOrUserOption());
+                userInput = reader.nextLine().trim();
+            }
         }
 
 
     }
 
     private static void loginUser(UserGreeterAndInfoPrinter userGreeter, UserMenuOptionsAndMessages userOptions) {
-
-//        library number (xxx-xxxx) and a password
-
-
-//        userGreeter.listOptionsForLoggedInUser(userOptions);
+        Scanner reader = new Scanner(System.in);
+        LibraryDatabase database = new LibraryDatabase();
+        String[] loggedInUser;
 
         System.out.println();
-        System.out.println("Welcome back, DUDE!!!!!");
-        System.out.println();
-        userGreeter.listOptionsForLoggedInUser(userOptions);
-        runAppForLoggedInUser(userOptions, userGreeter);
+        System.out.println("Please enter your library number (xxx-xxxx) and press ENTER");
+        String userInput = reader.nextLine().trim();
+
+        while(true) {
+            if (database.processUserLoginRequest(userInput)) {
+                System.out.println("Please enter your password and press ENTER");
+                userInput = reader.nextLine().trim();
+
+                if (database.checkUserPassword(userInput)) {
+                    loggedInUser = database.getUserToLogin();
+                    System.out.println("Welcome back, " + loggedInUser[2] + "!");
+                    runAppForLoggedInUser(userOptions, userGreeter, database);
+                    break;
+                }
+
+            } else if (userInput.equals("quit")) {
+                System.out.println();
+                System.out.println(userOptions.goodByeMessage());
+                reader.close();
+                break;
+            } else {
+                System.out.println();
+                System.out.println("Invalid library number or password, try again");
+                System.out.println(userOptions.quitOption());
+                userInput = reader.nextLine().trim();
+            }
+        }
     }
 
 }
+
+// lib number, password, name, email, phone,
+

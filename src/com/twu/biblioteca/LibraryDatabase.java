@@ -16,6 +16,9 @@ public class LibraryDatabase {
         currentMovies.add("Schindler's List; 1993; Steven Spielberg; 8.9");
         currentMovies.add("Raging Bull; 1980; Martin Scorsese; 8.2");
         currentMovies.add("Casablanca; 1942; Michael Curtiz; 8.5");
+
+        activeUsers.add("123-4567; password; John Smith; jsmith@gmail.com; (555)555-5555");
+        activeUsers.add("111-2222; password; Jane Brown; jbrown@gmail.com; (555)123-4567");
     }
 
     public ArrayList getCurrentBooks() {
@@ -30,7 +33,7 @@ public class LibraryDatabase {
         int bookIndex = -1;
 
         for (String bookEntry : currentBooks) {
-            String bookTitle = getTitle(bookEntry);
+            String bookTitle = getFirstItemInEntry(bookEntry);
             if (bookTitle.equals(title)) {
                 bookIndex = currentBooks.indexOf(bookEntry);
             }
@@ -43,13 +46,13 @@ public class LibraryDatabase {
         return false;
     }
 
-    public boolean processBookReturnRequestFromUser(String title) {
+    public boolean processBookReturnRequestFromUser(String userInput) {
         int bookIndex = -1;
         String bookToReturn = null;
 
         for (String checkedoutBook : checkedoutBooks) {
-            String bookTitle = getTitle(checkedoutBook);
-            if (bookTitle.equals(title)) {
+            String bookTitle = getFirstItemInEntry(checkedoutBook);
+            if (bookTitle.equals(userInput)) {
                 bookIndex = checkedoutBooks.indexOf(checkedoutBook);
                 bookToReturn = checkedoutBook;
             }
@@ -66,7 +69,7 @@ public class LibraryDatabase {
         int movieIndex = -1;
 
         for (String movieEntry : currentMovies) {
-            String bookTitle = getTitle(movieEntry);
+            String bookTitle = getFirstItemInEntry(movieEntry);
             if (bookTitle.equals(userInput)) {
                 movieIndex = currentMovies.indexOf(movieEntry);
             }
@@ -79,6 +82,35 @@ public class LibraryDatabase {
         return false;
     }
 
+    public boolean processUserLoginRequest (String userInput) {
+        int userIndex = -1;
+
+        for (String userEntry : activeUsers) {
+            String userLibraryNumber = getFirstItemInEntry(userEntry);
+                if (userLibraryNumber.equals(userInput)) {
+                    userIndex = activeUsers.indexOf(userEntry);
+                }
+        }
+
+        if (userIndex > -1) {
+            userToLogin = activeUsers.get(userIndex).split("; ");
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkUserPassword (String userInput) {
+        if (userToLogin[1].equals(userInput)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public String[] getUserToLogin() {
+        return userToLogin;
+    }
+
     private void checkoutBookToUser(int bookIndex) {
         checkedoutBooks.add(currentBooks.get(bookIndex));
         currentBooks.remove(bookIndex);
@@ -89,7 +121,7 @@ public class LibraryDatabase {
         checkedoutBooks.remove(book);
     }
 
-    private String getTitle(String item) {
+    private String getFirstItemInEntry(String item) {
         return item.split(";")[0];
     }
 
@@ -97,6 +129,8 @@ public class LibraryDatabase {
     private ArrayList<String> checkedoutBooks = new ArrayList<>();
     private ArrayList<String> currentMovies = new ArrayList<>();
     private ArrayList<String> checkedoutMovies = new ArrayList<>();
+    private ArrayList<String> activeUsers = new ArrayList<>();
+    private String[] userToLogin;
 
     private void checkoutMovieToUser(int movieIndex) {
         checkedoutMovies.add(currentMovies.get(movieIndex));

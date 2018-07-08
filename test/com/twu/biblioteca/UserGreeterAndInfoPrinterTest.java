@@ -13,6 +13,10 @@ public class UserGreeterAndInfoPrinterTest {
 
     @Test
     public void continueAsGuestOrUserOption() {
-        assertEquals("To continue as a guest: type in \"guest\" and press ENTER\nTo login: type in \"login\" and press ENTER", new UserGreeterAndInfoPrinter().continueAsGuestOrUserOption());
+        String expected = "To continue as a guest: type in \"guest\" and press ENTER" +
+                "\nTo login: type in \"login\" and press ENTER" +
+                "\nTo quit: type in \"quit\" and press ENTER";
+
+        assertEquals(expected, new UserGreeterAndInfoPrinter().continueAsGuestOrUserOption());
     }
 }
