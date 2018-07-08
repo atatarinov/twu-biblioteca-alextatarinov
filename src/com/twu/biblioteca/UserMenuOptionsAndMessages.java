@@ -3,7 +3,7 @@ package com.twu.biblioteca;
 public class UserMenuOptionsAndMessages {
 
     public String listBooksOption() {
-        return "Please type \"list books\" and press ENTER to view all available books";
+        return "To view all available books: type \"list books\" and press ENTER";
     }
 
     public String invalidOption() {
@@ -11,42 +11,59 @@ public class UserMenuOptionsAndMessages {
     }
 
     public String quitOption() {
-        return "or type \"quit\" and press ENTER to quit";
+        return "To quit: type \"quit\" and press ENTER";
     }
 
-    public String generalCheckoutOption() {
-        return "To checkout a book, type \"checkout\" and press ENTER";
+    public String bookCheckoutOption() {
+        return "To checkout a book, type \"checkout books\" and press ENTER";
     }
 
-    public String checkoutBookOption() {
+    public String checkoutBookEntry() {
         return "To checkout a book, type in the book's title and press ENTER";
     }
 
-    public String checkoutSuccessMessage() {
+    public String bookCheckoutSuccessMessage() {
         return "Thank you! Enjoy the book";
     }
 
-    public String checkoutFailMessage() {
+    public String bookCheckoutFailMessage() {
         return "That book is not available";
     }
 
-    public String generalReturnOption() {
-        return "To return a book, type \"return\" and press ENTER";
+    public String bookReturnOption() {
+        return "To return a book: type \"return book\" and press ENTER";
     }
 
     public String returnBookOption() {
-        return "To return a book, type in the book's title and press ENTER";
+        return "To return a book: type in the book's title and press ENTER";
     }
 
-    public String returnSuccessMessage() {
+    public String bookReturnSuccessMessage() {
         return "Thank you for returning the book";
     }
 
-    public String returnFailMessage() {
+    public String bookReturnFailMessage() {
         return "That is not a valid book to return";
     }
 
     public String listMoviesOption() {
-        return "Type \"list movies\" and press ENTER to view all available movies";
+        return "To view all available movies: type \"list movies\" and press ENTER";
+    }
+
+    public String movieCheckoutOption() {
+        return "To checkout a movie: type \"checkout movies\" and press ENTER";
+    }
+
+
+    public String checkoutMovieEntry() {
+        return "To checkout a movie: type in the movie's title and press ENTER";
+    }
+
+    public String movieCheckoutSuccessMessage() {
+        return "Thank you! Enjoy the movie";
+    }
+
+    public String movieCheckoutFailMessage() {
+        return "That movie is not available";
     }
 }

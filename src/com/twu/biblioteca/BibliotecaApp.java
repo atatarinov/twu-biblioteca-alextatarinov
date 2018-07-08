@@ -8,8 +8,11 @@ public class BibliotecaApp {
         System.out.println();
         System.out.println(userOptions.listBooksOption());
         System.out.println(userOptions.listMoviesOption());
-        System.out.println(userOptions.generalCheckoutOption());
-        System.out.println(userOptions.generalReturnOption());
+        System.out.println();
+        System.out.println(userOptions.bookCheckoutOption());
+        System.out.println(userOptions.movieCheckoutOption());
+        System.out.println();
+        System.out.println(userOptions.bookReturnOption());
         System.out.println(userOptions.quitOption());
     }
 
@@ -43,36 +46,53 @@ public class BibliotecaApp {
                 printMoviesOnScreenForUser(userGreeter, database);
                 listOptions(userOptions);
                 userInput = reader.nextLine().trim();
-            } else if (userInput.equals("checkout")) {
+            } else if (userInput.equals("checkout books")) {
                 System.out.println();
-                System.out.println(userOptions.checkoutBookOption());
+                System.out.println(userOptions.checkoutBookEntry());
                 userInput = reader.nextLine().trim();
 
-                if (database.processCheckoutRequestFromUser(userInput)) {
+                if (database.processBookCheckoutRequestFromUser(userInput)) {
                     System.out.println();
-                    System.out.println(userOptions.checkoutSuccessMessage());
+                    System.out.println(userOptions.bookCheckoutSuccessMessage());
                     listOptions(userOptions);
                     userInput = reader.nextLine().trim();
                 } else {
                     System.out.println();
-                    System.out.println(userOptions.checkoutFailMessage());
+                    System.out.println(userOptions.bookCheckoutFailMessage());
                     listOptions(userOptions);
                     userInput = reader.nextLine().trim();
                 }
 
-            } else if (userInput.equals("return")) {
+            } else if (userInput.equals("checkout movies")) {
                 System.out.println();
-                System.out.println(userOptions.returnBookOption());
+                System.out.println(userOptions.checkoutMovieEntry());
                 userInput = reader.nextLine().trim();
 
-                if (database.processReturnRequestFromUser(userInput)) {
+                if (database.processMovieCheckoutRequestFromUser(userInput)) {
                     System.out.println();
-                    System.out.println(userOptions.returnSuccessMessage());
+                    System.out.println(userOptions.movieCheckoutSuccessMessage());
                     listOptions(userOptions);
                     userInput = reader.nextLine().trim();
                 } else {
                     System.out.println();
-                    System.out.println(userOptions.returnFailMessage());
+                    System.out.println(userOptions.movieCheckoutFailMessage());
+                    listOptions(userOptions);
+                    userInput = reader.nextLine().trim();
+                }
+
+            } else if (userInput.equals("return book")) {
+                System.out.println();
+                System.out.println(userOptions.returnBookOption());
+                userInput = reader.nextLine().trim();
+
+                if (database.processBookReturnRequestFromUser(userInput)) {
+                    System.out.println();
+                    System.out.println(userOptions.bookReturnSuccessMessage());
+                    listOptions(userOptions);
+                    userInput = reader.nextLine().trim();
+                } else {
+                    System.out.println();
+                    System.out.println(userOptions.bookReturnFailMessage());
                     listOptions(userOptions);
                     userInput = reader.nextLine().trim();
                 }
@@ -83,6 +103,7 @@ public class BibliotecaApp {
                 reader.close();
                 break;
             } else {
+                System.out.println();
                 System.out.println(userOptions.invalidOption());
                 listOptions(userOptions);
                 userInput = reader.nextLine().trim();
@@ -102,6 +123,5 @@ public class BibliotecaApp {
         listOptions(userOptions);
         runOptionsForUser(userOptions, userGreeter);
     }
-
 
 }

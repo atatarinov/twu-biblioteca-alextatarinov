@@ -18,33 +18,19 @@ public class LibraryDatabase {
         currentMovies.add("Casablanca; 1942; Michael Curtiz; 8.5");
     }
 
-    private ArrayList<String> currentBooks = new ArrayList<>();
-    private ArrayList<String> checkedoutBooks = new ArrayList<>();
-    private ArrayList<String> currentMovies = new ArrayList<>();
-
     public ArrayList getCurrentBooks() {
         return currentBooks;
     }
 
-    private void checkoutBookToUser(int index) {
-        checkedoutBooks.add(currentBooks.get(index));
-        currentBooks.remove(index);
+    public ArrayList<String> getCurrentMovies() {
+        return currentMovies;
     }
 
-    private void returnBookFromUser(String book) {
-        currentBooks.add(book);
-        checkedoutBooks.remove(book);
-    }
-
-    private String getBookTitle(String bookEntry) {
-        return bookEntry.split(";")[0];
-    }
-
-    public boolean processCheckoutRequestFromUser(String title) {
+    public boolean processBookCheckoutRequestFromUser(String title) {
         int bookIndex = -1;
 
         for (String bookEntry : currentBooks) {
-            String bookTitle = getBookTitle(bookEntry);
+            String bookTitle = getTitle(bookEntry);
             if (bookTitle.equals(title)) {
                 bookIndex = currentBooks.indexOf(bookEntry);
             }
@@ -57,12 +43,12 @@ public class LibraryDatabase {
         return false;
     }
 
-    public boolean processReturnRequestFromUser(String title) {
+    public boolean processBookReturnRequestFromUser(String title) {
         int bookIndex = -1;
         String bookToReturn = null;
 
         for (String checkedoutBook : checkedoutBooks) {
-            String bookTitle = getBookTitle(checkedoutBook);
+            String bookTitle = getTitle(checkedoutBook);
             if (bookTitle.equals(title)) {
                 bookIndex = checkedoutBooks.indexOf(checkedoutBook);
                 bookToReturn = checkedoutBook;
@@ -76,7 +62,44 @@ public class LibraryDatabase {
         return false;
     }
 
-    public ArrayList<String> getCurrentMovies() {
-        return currentMovies;
+    private void checkoutBookToUser(int bookIndex) {
+        checkedoutBooks.add(currentBooks.get(bookIndex));
+        currentBooks.remove(bookIndex);
+    }
+
+    private void returnBookFromUser(String book) {
+        currentBooks.add(book);
+        checkedoutBooks.remove(book);
+    }
+
+    private String getTitle(String item) {
+        return item.split(";")[0];
+    }
+
+    private ArrayList<String> currentBooks = new ArrayList<>();
+    private ArrayList<String> checkedoutBooks = new ArrayList<>();
+    private ArrayList<String> currentMovies = new ArrayList<>();
+    private ArrayList<String> checkedoutMovies = new ArrayList<>();
+
+    public boolean processMovieCheckoutRequestFromUser(String userInput) {
+        int movieIndex = -1;
+
+        for (String movieEntry : currentMovies) {
+            String bookTitle = getTitle(movieEntry);
+            if (bookTitle.equals(userInput)) {
+                movieIndex = currentMovies.indexOf(movieEntry);
+            }
+        }
+
+        if (movieIndex > -1) {
+            checkoutMovieToUser(movieIndex);
+            return true;
+        }
+        return false;
+    }
+
+    private void checkoutMovieToUser(int movieIndex) {
+        checkedoutMovies.add(currentMovies.get(movieIndex));
+        currentMovies.remove(movieIndex);
     }
 }

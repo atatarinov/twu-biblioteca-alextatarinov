@@ -40,7 +40,7 @@ public class BibliotecaTest {
 
     @Test
     public void outputsListBooksOptionToUser() {
-        assertEquals("Please type \"list books\" and press ENTER to view all available books", new UserMenuOptionsAndMessages().listBooksOption());
+        assertEquals("To view all available books: type \"list books\" and press ENTER", new UserMenuOptionsAndMessages().listBooksOption());
     }
 
     @Test
@@ -50,12 +50,12 @@ public class BibliotecaTest {
 
     @Test
     public void outputsQuitOptionToUser() {
-        assertEquals("or type \"quit\" and press ENTER to quit", new UserMenuOptionsAndMessages().quitOption());
+        assertEquals("To quit: type \"quit\" and press ENTER", new UserMenuOptionsAndMessages().quitOption());
     }
 
     @Test
-    public void outputsCheckoutOptionToUser() {
-        assertEquals("To checkout a book, type \"checkout\" and press ENTER", new UserMenuOptionsAndMessages().generalCheckoutOption());
+    public void outputsBookCheckoutOptionToUser() {
+        assertEquals("To checkout a book, type \"checkout books\" and press ENTER", new UserMenuOptionsAndMessages().bookCheckoutOption());
     }
 
     @Test
@@ -66,24 +66,24 @@ public class BibliotecaTest {
                 "I Was Told There'd Be Cake; Sloane Crosley; 2008]";
 
         LibraryDatabase database = new LibraryDatabase();
-        database.processCheckoutRequestFromUser("The Hitchhiker's Guide to the Galaxy");
+        database.processBookCheckoutRequestFromUser("The Hitchhiker's Guide to the Galaxy");
 
         assertEquals(expected, database.getCurrentBooks().toString());
     }
 
     @Test
     public void outputsSuccessfulCheckoutMessage() {
-        assertEquals("Thank you! Enjoy the book", new UserMenuOptionsAndMessages().checkoutSuccessMessage());
+        assertEquals("Thank you! Enjoy the book", new UserMenuOptionsAndMessages().bookCheckoutSuccessMessage());
     }
 
     @Test
     public void outputsUnsuccessfulCheckoutMessage() {
-        assertEquals("That book is not available", new UserMenuOptionsAndMessages().checkoutFailMessage());
+        assertEquals("That book is not available", new UserMenuOptionsAndMessages().bookCheckoutFailMessage());
     }
 
     @Test
     public void outputsReturnOptionToUser() {
-        assertEquals("To return a book, type \"return\" and press ENTER", new UserMenuOptionsAndMessages().generalReturnOption());
+        assertEquals("To return a book: type \"return book\" and press ENTER", new UserMenuOptionsAndMessages().bookReturnOption());
     }
 
     @Test
@@ -93,27 +93,32 @@ public class BibliotecaTest {
                 "I Was Told There'd Be Cake; Sloane Crosley; 2008]";
 
         LibraryDatabase database = new LibraryDatabase();
-        database.processCheckoutRequestFromUser("Do Androids Dream of Electric Sheep");
-        database.processCheckoutRequestFromUser("The Hitchhiker's Guide to the Galaxy");
-        database.processCheckoutRequestFromUser("Something Wicked This Way Comes");
-        database.processReturnRequestFromUser("Do Androids Dream of Electric Sheep?");
+        database.processBookCheckoutRequestFromUser("Do Androids Dream of Electric Sheep");
+        database.processBookCheckoutRequestFromUser("The Hitchhiker's Guide to the Galaxy");
+        database.processBookCheckoutRequestFromUser("Something Wicked This Way Comes");
+        database.processBookReturnRequestFromUser("Do Androids Dream of Electric Sheep?");
 
         assertEquals(expected, database.getCurrentBooks().toString());
     }
 
     @Test
     public void outputsSuccessfulReturnMessage() {
-        assertEquals("Thank you for returning the book", new UserMenuOptionsAndMessages().returnSuccessMessage());
+        assertEquals("Thank you for returning the book", new UserMenuOptionsAndMessages().bookReturnSuccessMessage());
     }
 
     @Test
     public void outputsUnsuccessfulReturnMessage() {
-        assertEquals("That is not a valid book to return", new UserMenuOptionsAndMessages().returnFailMessage());
+        assertEquals("That is not a valid book to return", new UserMenuOptionsAndMessages().bookReturnFailMessage());
     }
 
     @Test
     public void outputsListMoviesOptionToUser() {
-        assertEquals("Type \"list movies\" and press ENTER to view all available movies", new UserMenuOptionsAndMessages().listMoviesOption());
+        assertEquals("To view all available movies: type \"list movies\" and press ENTER", new UserMenuOptionsAndMessages().listMoviesOption());
+    }
+
+    @Test
+    public void outputsMoiveCheckoutOptionToUser() {
+        assertEquals("To checkout a movie: type in the movie's title and press ENTER", new UserMenuOptionsAndMessages().checkoutMovieEntry());
     }
 }
 
