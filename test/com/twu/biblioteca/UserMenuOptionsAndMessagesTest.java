@@ -23,7 +23,7 @@ public class UserMenuOptionsAndMessagesTest {
 
     @Test
     public void bookCheckoutOption() {
-        assertEquals("To checkout a book, type \"checkout books\" and press ENTER", new UserMenuOptionsAndMessages().bookCheckoutOption());
+        assertEquals("To checkout a book, type \"checkout book\" and press ENTER", new UserMenuOptionsAndMessages().bookCheckoutOption());
     }
 
     @Test
@@ -43,7 +43,7 @@ public class UserMenuOptionsAndMessagesTest {
 
     @Test
     public void movieCheckoutOption() {
-        assertEquals("To checkout a movie: type \"checkout movies\" and press ENTER", new UserMenuOptionsAndMessages().movieCheckoutOption());
+        assertEquals("To checkout a movie: type \"checkout movie\" and press ENTER", new UserMenuOptionsAndMessages().movieCheckoutOption());
     }
 
     @Test
@@ -98,6 +98,6 @@ public class UserMenuOptionsAndMessagesTest {
 
     @Test
     public void showUserInfo() {
-        assertEquals("To view your user information: type \"user\" and press ENTER", new UserMenuOptionsAndMessages().showUserInfoOption());
+        assertEquals("To view your account information: type \"my account\" and press ENTER", new UserMenuOptionsAndMessages().showUserInfoOption());
     }
 }

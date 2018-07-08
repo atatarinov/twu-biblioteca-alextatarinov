@@ -4,6 +4,13 @@ import java.util.ArrayList;
 
 public class UserGreeterAndInfoPrinter {
 
+    public void printUserNameEmailPhone(String[] loggedInUser) {
+        System.out.println();
+        System.out.println("My account information:");
+        System.out.println();
+        System.out.println("Name: " + loggedInUser[2] + "\nEmail: " + loggedInUser[3] + "\nPhone number: " + loggedInUser[4]);
+    }
+
     public void startupGreeting() {
         System.out.println("*****************************************************************");
         System.out.println("*** " + greetUserOnStart() + " ***");

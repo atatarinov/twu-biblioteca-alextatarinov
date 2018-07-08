@@ -4,6 +4,13 @@ import java.util.ArrayList;
 
 public class LibraryDatabase {
 
+    private ArrayList<String> currentBooks = new ArrayList<>();
+    private ArrayList<String> checkedoutBooks = new ArrayList<>();
+    private ArrayList<String> currentMovies = new ArrayList<>();
+    private ArrayList<String> checkedoutMovies = new ArrayList<>();
+    private ArrayList<String> activeUsers = new ArrayList<>();
+    private String[] userToLogin;
+
     public LibraryDatabase() {
         currentBooks.add("Do Androids Dream of Electric Sheep?; Philip K. Dick; 1996");
         currentBooks.add("The Hitchhiker's Guide to the Galaxy; Douglas Adams; 1995");
@@ -82,14 +89,14 @@ public class LibraryDatabase {
         return false;
     }
 
-    public boolean processUserLoginRequest (String userInput) {
+    public boolean processUserLoginRequest(String userInput) {
         int userIndex = -1;
 
         for (String userEntry : activeUsers) {
             String userLibraryNumber = getFirstItemInEntry(userEntry);
-                if (userLibraryNumber.equals(userInput)) {
-                    userIndex = activeUsers.indexOf(userEntry);
-                }
+            if (userLibraryNumber.equals(userInput)) {
+                userIndex = activeUsers.indexOf(userEntry);
+            }
         }
 
         if (userIndex > -1) {
@@ -99,7 +106,7 @@ public class LibraryDatabase {
         return false;
     }
 
-    public boolean checkUserPassword (String userInput) {
+    public boolean checkUserPassword(String userInput) {
         if (userToLogin[1].equals(userInput)) {
             return true;
         } else {
@@ -124,13 +131,6 @@ public class LibraryDatabase {
     private String getFirstItemInEntry(String item) {
         return item.split(";")[0];
     }
-
-    private ArrayList<String> currentBooks = new ArrayList<>();
-    private ArrayList<String> checkedoutBooks = new ArrayList<>();
-    private ArrayList<String> currentMovies = new ArrayList<>();
-    private ArrayList<String> checkedoutMovies = new ArrayList<>();
-    private ArrayList<String> activeUsers = new ArrayList<>();
-    private String[] userToLogin;
 
     private void checkoutMovieToUser(int movieIndex) {
         checkedoutMovies.add(currentMovies.get(movieIndex));

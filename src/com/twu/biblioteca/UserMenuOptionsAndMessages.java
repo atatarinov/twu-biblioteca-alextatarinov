@@ -2,6 +2,18 @@ package com.twu.biblioteca;
 
 public class UserMenuOptionsAndMessages {
 
+    public String invalidLoginMessage() {
+        return "Invalid library number or password, try again";
+    }
+
+    public String enterPasswordOption() {
+        return "Please enter your password and press ENTER";
+    }
+
+    public String enterLibraryNumberOption() {
+        return "Please enter your library number (xxx-xxxx) and press ENTER";
+    }
+
     public String listBooksOption() {
         return "To view all available books: type \"list books\" and press ENTER";
     }
@@ -15,7 +27,7 @@ public class UserMenuOptionsAndMessages {
     }
 
     public String bookCheckoutOption() {
-        return "To checkout a book, type \"checkout books\" and press ENTER";
+        return "To checkout a book, type \"checkout book\" and press ENTER";
     }
 
     public String checkoutBookEntryOption() {
@@ -51,7 +63,7 @@ public class UserMenuOptionsAndMessages {
     }
 
     public String movieCheckoutOption() {
-        return "To checkout a movie: type \"checkout movies\" and press ENTER";
+        return "To checkout a movie: type \"checkout movie\" and press ENTER";
     }
 
     public String checkoutMovieEntryOption() {
@@ -79,6 +91,6 @@ public class UserMenuOptionsAndMessages {
     }
 
     public String showUserInfoOption() {
-        return "To view your user information: type \"user\" and press ENTER";
+        return "To view your account information: type \"my account\" and press ENTER";
     }
 }

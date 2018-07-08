@@ -4,6 +4,42 @@ import java.util.Scanner;
 
 public class RunLibraryApp {
 
+    private static boolean userInputIsQuit(String userInput) {
+        return userInput.equals("quit");
+    }
+
+    private static boolean userInputIsLogin(String userInput) {
+        return userInput.equals("login");
+    }
+
+    private static boolean userInputIsGuest(String userInput) {
+        return userInput.equals("guest");
+    }
+
+    private static boolean userInputIsListBooks(String userInput) {
+        return userInput.equals("list books");
+    }
+
+    private static boolean userInputIsCheckoutBook(String userInput) {
+        return userInput.equals("checkout book");
+    }
+
+    private static boolean userInputIsListMovies(String userInput) {
+        return userInput.equals("list movies");
+    }
+
+    private static boolean userInputIsMyAccount(String userInput) {
+        return userInput.equals("my account");
+    }
+
+    private static boolean userInputIsReturnBook(String userInput) {
+        return userInput.equals("return book");
+    }
+
+    private static boolean userInputIsCheckoutMovie(String userInput) {
+        return userInput.equals("checkout movie");
+    }
+
     public static void startLibraryApp() {
         UserGreeterAndInfoPrinter userGreeter = new UserGreeterAndInfoPrinter();
         UserMenuOptionsAndMessages userOptions = new UserMenuOptionsAndMessages();
@@ -32,42 +68,6 @@ public class RunLibraryApp {
                 userInput = reader.nextLine().trim();
             }
         }
-    }
-
-    private static boolean userInputIsQuit(String userInput) {
-        return userInput.equals("quit");
-    }
-
-    private static boolean userInputIsLogin(String userInput) {
-        return userInput.equals("login");
-    }
-
-    private static boolean userInputIsGuest(String userInput) {
-        return userInput.equals("guest");
-    }
-
-    private static boolean userInputIsListBooks(String userInput) {
-        return userInput.equals("list books");
-    }
-
-    private static boolean userInputIsCheckoutBooks(String userInput) {
-        return userInput.equals("checkout books");
-    }
-
-    private static boolean userInputIsListMovies(String userInput) {
-        return userInput.equals("list movies");
-    }
-
-    private static boolean userInputIsUser(String userInput) {
-        return userInput.equals("user");
-    }
-
-    private static boolean userInputIsReturnBook(String userInput) {
-        return userInput.equals("return book");
-    }
-
-    private static boolean userInputIsCheckoutMovies(String userInput) {
-        return userInput.equals("checkout movies");
     }
 
     private static void runAppForGuestUser(UserMenuOptionsAndMessages userOptions, UserGreeterAndInfoPrinter userGreeter) {
@@ -114,7 +114,7 @@ public class RunLibraryApp {
                 userGreeter.printAvailableMoviesToScreenForUser(database);
                 userGreeter.listOptionsForLoggedInUser(userOptions);
                 userInput = reader.nextLine().trim();
-            } else if (userInputIsCheckoutBooks(userInput)) {
+            } else if (userInputIsCheckoutBook(userInput)) {
                 System.out.println();
                 System.out.println(userOptions.checkoutBookEntryOption());
                 userInput = reader.nextLine().trim();
@@ -131,7 +131,7 @@ public class RunLibraryApp {
                     userInput = reader.nextLine().trim();
                 }
 
-            } else if (userInputIsCheckoutMovies(userInput)) {
+            } else if (userInputIsCheckoutMovie(userInput)) {
                 System.out.println();
                 System.out.println(userOptions.checkoutMovieEntryOption());
                 userInput = reader.nextLine().trim();
@@ -170,8 +170,8 @@ public class RunLibraryApp {
                 System.out.println(userOptions.goodByeMessage());
                 reader.close();
                 break;
-            } else if (userInputIsUser(userInput)) {
-                printUserNameEmailPhone(loggedInUser);
+            } else if (userInputIsMyAccount(userInput)) {
+                userGreeter.printUserNameEmailPhone(loggedInUser);
                 userGreeter.listOptionsForLoggedInUser(userOptions);
                 userInput = reader.nextLine().trim();
             } else {
@@ -183,25 +183,18 @@ public class RunLibraryApp {
         }
     }
 
-    private static void printUserNameEmailPhone(String[] loggedInUser) {
-        System.out.println();
-        System.out.println("Your user information:");
-        System.out.println();
-        System.out.println("Name: " + loggedInUser[2] + "\nEmail: " + loggedInUser[3] + "\nPhone number: " + loggedInUser[4]);
-    }
-
     private static void loginUser(UserGreeterAndInfoPrinter userGreeter, UserMenuOptionsAndMessages userOptions) {
         Scanner reader = new Scanner(System.in);
         LibraryDatabase database = new LibraryDatabase();
         String[] loggedInUser;
 
         System.out.println();
-        System.out.println("Please enter your library number (xxx-xxxx) and press ENTER");
+        System.out.println(userOptions.enterLibraryNumberOption());
         String userInput = reader.nextLine().trim();
 
         while (true) {
             if (database.processUserLoginRequest(userInput)) {
-                System.out.println("Please enter your password and press ENTER");
+                System.out.println(userOptions.enterPasswordOption());
                 userInput = reader.nextLine().trim();
 
                 if (database.checkUserPassword(userInput)) {
@@ -218,10 +211,11 @@ public class RunLibraryApp {
                 break;
             } else {
                 System.out.println();
-                System.out.println("Invalid library number or password, try again");
+                System.out.println(userOptions.invalidLoginMessage());
                 System.out.println(userOptions.quitOption());
                 userInput = reader.nextLine().trim();
             }
         }
     }
+
 }
