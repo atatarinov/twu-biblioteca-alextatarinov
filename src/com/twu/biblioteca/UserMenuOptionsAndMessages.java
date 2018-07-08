@@ -18,7 +18,7 @@ public class UserMenuOptionsAndMessages {
         return "To checkout a book, type \"checkout books\" and press ENTER";
     }
 
-    public String checkoutBookEntry() {
+    public String checkoutBookEntryOption() {
         return "To checkout a book, type in the book's title and press ENTER";
     }
 
@@ -34,7 +34,7 @@ public class UserMenuOptionsAndMessages {
         return "To return a book: type \"return book\" and press ENTER";
     }
 
-    public String returnBookOption() {
+    public String returnBookEntryOption() {
         return "To return a book: type in the book's title and press ENTER";
     }
 
@@ -54,8 +54,7 @@ public class UserMenuOptionsAndMessages {
         return "To checkout a movie: type \"checkout movies\" and press ENTER";
     }
 
-
-    public String checkoutMovieEntry() {
+    public String checkoutMovieEntryOption() {
         return "To checkout a movie: type in the movie's title and press ENTER";
     }
 

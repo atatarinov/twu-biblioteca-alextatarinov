@@ -21,7 +21,7 @@ public class BibliotecaApp {
                 userInput = reader.nextLine().trim();
             } else if (userInput.equals("checkout books")) {
                 System.out.println();
-                System.out.println(userOptions.checkoutBookEntry());
+                System.out.println(userOptions.checkoutBookEntryOption());
                 userInput = reader.nextLine().trim();
 
                 if (database.processBookCheckoutRequestFromUser(userInput)) {
@@ -38,7 +38,7 @@ public class BibliotecaApp {
 
             } else if (userInput.equals("checkout movies")) {
                 System.out.println();
-                System.out.println(userOptions.checkoutMovieEntry());
+                System.out.println(userOptions.checkoutMovieEntryOption());
                 userInput = reader.nextLine().trim();
 
                 if (database.processMovieCheckoutRequestFromUser(userInput)) {
@@ -55,7 +55,7 @@ public class BibliotecaApp {
 
             } else if (userInput.equals("return book")) {
                 System.out.println();
-                System.out.println(userOptions.returnBookOption());
+                System.out.println(userOptions.returnBookEntryOption());
                 userInput = reader.nextLine().trim();
 
                 if (database.processBookReturnRequestFromUser(userInput)) {
