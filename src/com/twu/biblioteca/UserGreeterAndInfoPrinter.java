@@ -8,6 +8,12 @@ public class UserGreeterAndInfoPrinter {
         System.out.println("*****************************************************************");
         System.out.println("*** " + greetUserOnStart() + " ***");
         System.out.println("*****************************************************************");
+        System.out.println();
+        System.out.println(continueAsGuestOrUserOption());
+    }
+
+    public String continueAsGuestOrUserOption() {
+        return "To continue as a guest: type in \"guest\" and press ENTER\nTo login: type in \"login\" and press ENTER";
     }
 
     public void printAvailableMoviesToScreenForUser(LibraryDatabase database) {
@@ -17,7 +23,18 @@ public class UserGreeterAndInfoPrinter {
         printMoviesTable(database.getCurrentMovies());
     }
 
-    public void listOptions(UserMenuOptionsAndMessages userOptions) {
+    public void listOptionsForGuestUser(UserMenuOptionsAndMessages userOptions) {
+        System.out.println();
+        System.out.println(userOptions.loginRequiredMessage());
+        System.out.println();
+        System.out.println(userOptions.listBooksOption());
+        System.out.println(userOptions.listMoviesOption());
+        System.out.println();
+
+        System.out.println(userOptions.quitOption());
+    }
+
+    public void listOptionsForLoggedInUser(UserMenuOptionsAndMessages userOptions) {
         System.out.println();
         System.out.println(userOptions.listBooksOption());
         System.out.println(userOptions.listMoviesOption());

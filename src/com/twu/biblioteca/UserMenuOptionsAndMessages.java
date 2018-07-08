@@ -69,4 +69,12 @@ public class UserMenuOptionsAndMessages {
     public String goodByeMessage() {
         return "Good bye!";
     }
+
+    public String loginRequiredMessage() {
+        return "You must login to check-out and return books";
+    }
+
+    public String continueAsGuestOrUserOption() {
+        return "hello";
+    }
 }

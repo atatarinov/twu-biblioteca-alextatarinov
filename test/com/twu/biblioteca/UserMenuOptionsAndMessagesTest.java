@@ -90,4 +90,10 @@ public class UserMenuOptionsAndMessagesTest {
     public void checkoutBookEntryOption() {
         assertEquals("To checkout a book, type in the book's title and press ENTER", new UserMenuOptionsAndMessages().checkoutBookEntryOption());
     }
+
+    @Test
+    public void loginRequiredMessage() {
+        assertEquals("You must login to check-out and return books", new UserMenuOptionsAndMessages().loginRequiredMessage());
+    }
+
 }

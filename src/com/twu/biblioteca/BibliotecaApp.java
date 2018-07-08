@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class BibliotecaApp {
 
-    private static void runAppForUser(UserMenuOptionsAndMessages userOptions, UserGreeterAndInfoPrinter userGreeter) {
+    private static void runAppForGuestUser(UserMenuOptionsAndMessages userOptions, UserGreeterAndInfoPrinter userGreeter) {
         LibraryDatabase database = new LibraryDatabase();
         Scanner reader = new Scanner(System.in);
         String userInput = reader.nextLine().trim();
@@ -13,11 +13,40 @@ public class BibliotecaApp {
 
             if (userInput.equals("list books")) {
                 userGreeter.printAvailableBooksToScreenForUser(database);
-                userGreeter.listOptions(userOptions);
+                userGreeter.listOptionsForGuestUser(userOptions);
                 userInput = reader.nextLine().trim();
             } else if (userInput.equals("list movies")) {
                 userGreeter.printAvailableMoviesToScreenForUser(database);
-                userGreeter.listOptions(userOptions);
+                userGreeter.listOptionsForGuestUser(userOptions);
+                userInput = reader.nextLine().trim();
+            } else if (userInput.equals("quit")) {
+                System.out.println();
+                System.out.println(userOptions.goodByeMessage());
+                reader.close();
+                break;
+            } else {
+                System.out.println();
+                System.out.println(userOptions.invalidOption());
+                userGreeter.listOptionsForLoggedInUser(userOptions);
+                userInput = reader.nextLine().trim();
+            }
+        }
+    }
+
+    private static void runAppForLoggedInUser(UserMenuOptionsAndMessages userOptions, UserGreeterAndInfoPrinter userGreeter) {
+        LibraryDatabase database = new LibraryDatabase();
+        Scanner reader = new Scanner(System.in);
+        String userInput = reader.nextLine().trim();
+
+        while (true) {
+
+            if (userInput.equals("list books")) {
+                userGreeter.printAvailableBooksToScreenForUser(database);
+                userGreeter.listOptionsForLoggedInUser(userOptions);
+                userInput = reader.nextLine().trim();
+            } else if (userInput.equals("list movies")) {
+                userGreeter.printAvailableMoviesToScreenForUser(database);
+                userGreeter.listOptionsForLoggedInUser(userOptions);
                 userInput = reader.nextLine().trim();
             } else if (userInput.equals("checkout books")) {
                 System.out.println();
@@ -27,12 +56,12 @@ public class BibliotecaApp {
                 if (database.processBookCheckoutRequestFromUser(userInput)) {
                     System.out.println();
                     System.out.println(userOptions.bookCheckoutSuccessMessage());
-                    userGreeter.listOptions(userOptions);
+                    userGreeter.listOptionsForLoggedInUser(userOptions);
                     userInput = reader.nextLine().trim();
                 } else {
                     System.out.println();
                     System.out.println(userOptions.bookCheckoutFailMessage());
-                    userGreeter.listOptions(userOptions);
+                    userGreeter.listOptionsForLoggedInUser(userOptions);
                     userInput = reader.nextLine().trim();
                 }
 
@@ -44,12 +73,12 @@ public class BibliotecaApp {
                 if (database.processMovieCheckoutRequestFromUser(userInput)) {
                     System.out.println();
                     System.out.println(userOptions.movieCheckoutSuccessMessage());
-                    userGreeter.listOptions(userOptions);
+                    userGreeter.listOptionsForLoggedInUser(userOptions);
                     userInput = reader.nextLine().trim();
                 } else {
                     System.out.println();
                     System.out.println(userOptions.movieCheckoutFailMessage());
-                    userGreeter.listOptions(userOptions);
+                    userGreeter.listOptionsForLoggedInUser(userOptions);
                     userInput = reader.nextLine().trim();
                 }
 
@@ -61,12 +90,12 @@ public class BibliotecaApp {
                 if (database.processBookReturnRequestFromUser(userInput)) {
                     System.out.println();
                     System.out.println(userOptions.bookReturnSuccessMessage());
-                    userGreeter.listOptions(userOptions);
+                    userGreeter.listOptionsForLoggedInUser(userOptions);
                     userInput = reader.nextLine().trim();
                 } else {
                     System.out.println();
                     System.out.println(userOptions.bookReturnFailMessage());
-                    userGreeter.listOptions(userOptions);
+                    userGreeter.listOptionsForLoggedInUser(userOptions);
                     userInput = reader.nextLine().trim();
                 }
 
@@ -78,7 +107,7 @@ public class BibliotecaApp {
             } else {
                 System.out.println();
                 System.out.println(userOptions.invalidOption());
-                userGreeter.listOptions(userOptions);
+                userGreeter.listOptionsForLoggedInUser(userOptions);
                 userInput = reader.nextLine().trim();
             }
         }
@@ -89,8 +118,32 @@ public class BibliotecaApp {
         UserMenuOptionsAndMessages userOptions = new UserMenuOptionsAndMessages();
 
         userGreeter.startupGreeting();
-        userGreeter.listOptions(userOptions);
-        runAppForUser(userOptions, userGreeter);
+
+        Scanner reader = new Scanner(System.in);
+        String userInput = reader.nextLine().trim();
+
+        if (userInput.equals("guest")) {
+            userGreeter.listOptionsForGuestUser(userOptions);
+            runAppForGuestUser(userOptions, userGreeter);
+        } else if (userInput.equals("login")) {
+            loginUser(userGreeter, userOptions);
+        }
+
+
+    }
+
+    private static void loginUser(UserGreeterAndInfoPrinter userGreeter, UserMenuOptionsAndMessages userOptions) {
+
+//        library number (xxx-xxxx) and a password
+
+
+//        userGreeter.listOptionsForLoggedInUser(userOptions);
+
+        System.out.println();
+        System.out.println("Welcome back, DUDE!!!!!");
+        System.out.println();
+        userGreeter.listOptionsForLoggedInUser(userOptions);
+        runAppForLoggedInUser(userOptions, userGreeter);
     }
 
 }

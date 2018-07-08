@@ -10,4 +10,9 @@ public class UserGreeterAndInfoPrinterTest {
     public void greetUserOnStart() {
         assertEquals("Welcome to the Bangalore Public Library Management System", new UserGreeterAndInfoPrinter().greetUserOnStart());
     }
+
+    @Test
+    public void continueAsGuestOrUserOption() {
+        assertEquals("To continue as a guest: type in \"guest\" and press ENTER\nTo login: type in \"login\" and press ENTER", new UserGreeterAndInfoPrinter().continueAsGuestOrUserOption());
+    }
 }
