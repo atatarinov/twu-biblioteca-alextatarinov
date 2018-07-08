@@ -4,11 +4,43 @@ import java.util.ArrayList;
 
 public class UserGreeterAndInfoPrinter {
 
+    public void startupGreeting() {
+        System.out.println("*****************************************************************");
+        System.out.println("*** " + greetUserOnStart() + " ***");
+        System.out.println("*****************************************************************");
+    }
+
+    public void printAvailableMoviesToScreenForUser(LibraryDatabase database) {
+        System.out.println();
+        System.out.println("Currently available movies:");
+        System.out.println();
+        printMoviesTable(database.getCurrentMovies());
+    }
+
+    public void listOptions(UserMenuOptionsAndMessages userOptions) {
+        System.out.println();
+        System.out.println(userOptions.listBooksOption());
+        System.out.println(userOptions.listMoviesOption());
+        System.out.println();
+        System.out.println(userOptions.bookCheckoutOption());
+        System.out.println(userOptions.movieCheckoutOption());
+        System.out.println();
+        System.out.println(userOptions.bookReturnOption());
+        System.out.println(userOptions.quitOption());
+    }
+
+    public void printAvailableBooksToScreenForUser(LibraryDatabase database) {
+        System.out.println();
+        System.out.println("Currently available books:");
+        System.out.println();
+        printBooksTable(database.getCurrentBooks());
+    }
+
     public String greetUserOnStart() {
         return "Welcome to the Bangalore Public Library Management System";
     }
 
-    public void printBooksToScreenForUser(ArrayList<String> bookList) {
+    public void printBooksTable(ArrayList<String> bookList) {
 
         System.out.printf("%-41s %-40s %4s\n", "Title:", "Author:", "Year:");
         System.out.println();
@@ -23,7 +55,7 @@ public class UserGreeterAndInfoPrinter {
         }
     }
 
-    public void printMoviesToScreenForUser(ArrayList<String> movieList) {
+    public void printMoviesTable(ArrayList<String> movieList) {
         System.out.printf("%-41s %-6s %-40s %4s\n", "Name:", "Year:", "Director:", "IMDb rating:");
         System.out.println();
 

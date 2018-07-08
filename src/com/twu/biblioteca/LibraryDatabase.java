@@ -62,6 +62,23 @@ public class LibraryDatabase {
         return false;
     }
 
+    public boolean processMovieCheckoutRequestFromUser(String userInput) {
+        int movieIndex = -1;
+
+        for (String movieEntry : currentMovies) {
+            String bookTitle = getTitle(movieEntry);
+            if (bookTitle.equals(userInput)) {
+                movieIndex = currentMovies.indexOf(movieEntry);
+            }
+        }
+
+        if (movieIndex > -1) {
+            checkoutMovieToUser(movieIndex);
+            return true;
+        }
+        return false;
+    }
+
     private void checkoutBookToUser(int bookIndex) {
         checkedoutBooks.add(currentBooks.get(bookIndex));
         currentBooks.remove(bookIndex);
@@ -80,23 +97,6 @@ public class LibraryDatabase {
     private ArrayList<String> checkedoutBooks = new ArrayList<>();
     private ArrayList<String> currentMovies = new ArrayList<>();
     private ArrayList<String> checkedoutMovies = new ArrayList<>();
-
-    public boolean processMovieCheckoutRequestFromUser(String userInput) {
-        int movieIndex = -1;
-
-        for (String movieEntry : currentMovies) {
-            String bookTitle = getTitle(movieEntry);
-            if (bookTitle.equals(userInput)) {
-                movieIndex = currentMovies.indexOf(movieEntry);
-            }
-        }
-
-        if (movieIndex > -1) {
-            checkoutMovieToUser(movieIndex);
-            return true;
-        }
-        return false;
-    }
 
     private void checkoutMovieToUser(int movieIndex) {
         checkedoutMovies.add(currentMovies.get(movieIndex));

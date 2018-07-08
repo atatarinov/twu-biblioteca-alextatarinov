@@ -66,4 +66,8 @@ public class UserMenuOptionsAndMessages {
     public String movieCheckoutFailMessage() {
         return "That movie is not available";
     }
+
+    public String goodByeMessage() {
+        return "Good bye!";
+    }
 }
